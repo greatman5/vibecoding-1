@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개발자 포트폴리오</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2c3e50;
+        }
+
+        .experience-item, .project-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2c3e50;
+        }
+
+        .experience-item h3, .project-item h3 {
+            color: #333;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .experience-item .company, .project-item .tech {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .experience-item .period, .project-item .period {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .contact-item strong {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 40px 20px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>홍길동</h1>
+            <p>풀스택 개발자 | 5년 경력</p>
+        </header>
+
+        <div class="content">
+            <section>
+                <h2>👋 소개</h2>
+                <p>
+                    안녕하세요! 5년 차 풀스택 개발자입니다. 웹 애플리케이션 개발과 클라우드 아키텍처 설계에 전문성을 가지고 있으며,
+                    사용자 중심의 제품을 만드는 것을 목표로 합니다. 최근에는 AI/ML 기술을 활용한 스마트 서비스 개발에 관심을 두고 있습니다.
+                </p>
+            </section>
+
+            <section>
+                <h2>💼 경력</h2>
+                <div class="experience-item">
+                    <h3>시니어 소프트웨어 엔지니어</h3>
+                    <div class="company">테크 컴퍼니</div>
+                    <div class="period">2022.03 - 현재</div>
+                    <p>마이크로서비스 아키텍처 설계 및 개발, 팀 리딩, 코드 리뷰</p>
+                </div>
+                <div class="experience-item">
+                    <h3>소프트웨어 엔지니어</h3>
+                    <div class="company">스타트업 A</div>
+                    <div class="period">2020.01 - 2022.02</div>
+                    <p>웹 애플리케이션 프론트엔드/백엔드 개발, DevOps 구축</p>
+                </div>
+                <div class="experience-item">
+                    <h3>주니어 개발자</h3>
+                    <div class="company">IT 솔루션 회사</div>
+                    <div class="period">2018.07 - 2019.12</div>
+                    <p>엔터프라이즈 웹 애플리케이션 개발, 유지보수</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>🛠️ 기술 스택</h2>
+                <div class="skills">
+                    <span class="skill-tag">JavaScript/TypeScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Spring Boot</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Kubernetes</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Git</span>
+                </div>
+            </section>
+
+            <section>
+                <h2>🚀 주요 프로젝트</h2>
+                <div class="project-item">
+                    <h3>이커머스 플랫폼 리뉴얼</h3>
+                    <div class="tech">React, Node.js, PostgreSQL, AWS</div>
+                    <div class="period">2023.06 - 2023.12</div>
+                    <p>기존 레거시 시스템을 마이크로서비스로 전환하여 성능 50% 향상 및 유지보수성 개선</p>
+                </div>
+                <div class="project-item">
+                    <h3>실시간 협업 툴 개발</h3>
+                    <div class="tech">TypeScript, WebSocket, Redis</div>
+                    <div class="period">2022.09 - 2023.02</div>
+                    <p>실시간 문서 공유 및 협업 기능을 갖춘 웹 애플리케이션 개발</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>📞 연락처</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>이메일</strong>
+                        example@email.com
+                    </div>
+                    <div class="contact-item">
+                        <strong>GitHub</strong>
+                        github.com/username
+                    </div>
+                    <div class="contact-item">
+                        <strong>LinkedIn</strong>
+                        linkedin.com/in/username
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>© 2024 포트폴리오. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
