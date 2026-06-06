@@ -72,6 +72,37 @@ body {
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
+.cta-button.highlight {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+    color: white;
+    font-size: 1.25em;
+    padding: 18px 45px;
+    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+    animation: cta-pulse 2s infinite ease-in-out;
+}
+
+.cta-button.highlight:hover {
+    background: linear-gradient(135deg, #ff4d4d 0%, #ff6b6b 100%);
+    box-shadow: 0 6px 25px rgba(255, 107, 107, 0.6);
+    animation: none;
+    transform: translateY(-4px) scale(1.03);
+}
+
+@keyframes cta-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 8px 30px rgba(255, 107, 107, 0.7);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+    }
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;

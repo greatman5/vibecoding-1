@@ -1,9 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
   <head>
-    <title>Hello Git!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Git! - 나의 첫 Git 프로젝트</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>나의 첫 Git 프로젝트</h1>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>나의 첫 Git 프로젝트</h1>
+            <p>다양한 웹 페이지와 포트폴리오 컬렉션</p>
+            <a href="portfolio.html" class="cta-button highlight">포트폴리오 바로가기</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2 class="section-title">웹 페이지 목록</h2>
+        
+        <div class="products-grid">
+            <!-- 개발자 포트폴리오 카드 -->
+            <div class="product-card">
+                <div class="product-image">💼</div>
+                <div class="product-info">
+                    <span class="product-badge" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);">PORTFOLIO</span>
+                    <h3 class="product-name">개발자 포트폴리오</h3>
+                    <p class="product-description">5년 경력 풀스택 개발자의 기술 스택, 경력 사항, 프로젝트 실적을 정리한 포트폴리오 페이지입니다.</p>
+                    <a href="portfolio.html" style="text-decoration: none;">
+                        <button class="buy-button">방문하기</button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 여름 컬렉션 카드 -->
+            <div class="product-card">
+                <div class="product-image">☀️</div>
+                <div class="product-info">
+                    <span class="product-badge">COLLECTION</span>
+                    <h3 class="product-name">여름 신상품 컬렉션</h3>
+                    <p class="product-description">2024 여름 시즌 트렌디하고 시원한 패션 아이템 및 특별 혜택을 소개하는 브랜드 쇼핑 페이지입니다.</p>
+                    <a href="summer-collection.html" style="text-decoration: none;">
+                        <button class="buy-button">방문하기</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Git Project. All rights reserved.</p>
+    </footer>
   </body>
 </html>
