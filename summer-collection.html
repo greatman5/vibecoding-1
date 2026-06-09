@@ -3,145 +3,1187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2024 여름 신상품 컬렉션</title>
-    <link rel="stylesheet" href="style.css">
+    <title>여름 신상 컬렉션 - 3D 피규어 쇼핑몰</title>
+    <meta name="description" content="2026 여름 시즌 한정판 3D 피규어 컬렉션. Three.js 기반의 실시간 3D 뷰어와 색상 커스터마이징을 통해 나만의 피규어를 만나보세요.">
+    <link rel="stylesheet" href="summer.css">
+    <!-- Lucide Icons for premium UI icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <div class="hero">
-        <div class="hero-content">
-            <h1>☀️ 2024 여름 신상품 컬렉션</h1>
-            <p>시원하고 스타일리시한 여름을 위한 최신 트렌드</p>
-            <a href="#products" class="cta-button">신상품 보기</a>
+    <header>
+        <a href="index.html" class="logo">
+            <span>🏝️</span> OCEAN 3D
+        </a>
+        <nav>
+            <a href="index.html">홈</a>
+            <a href="#" class="active">여름 컬렉션</a>
+            <a href="portfolio.html">포트폴리오</a>
+        </nav>
+        <div class="header-actions">
+            <button class="cart-btn" id="cart-toggle" aria-label="장바구니">
+                <i data-lucide="shopping-bag"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </button>
+            <a href="index.html" class="back-home">이전 페이지</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- Left Column: Figure Spec & Actions -->
+        <section class="info-section">
+            <div>
+                <span class="hero-tag">2026 Summer Drop</span>
+                <div class="title-area" style="margin-top: 1rem;">
+                    <h1>여름 한정 <span>3D 피규어</span></h1>
+                    <p>마우스로 드래그하여 피규어를 360도 회전하며 감상하고, 나만의 전용 컬러로 커스터마이징하여 특별한 여름 컬렉션을 완성해 보세요.</p>
+                </div>
+            </div>
+
+            <!-- Collection Card list -->
+            <div class="collection-list">
+                <div class="collection-card active" data-id="mage-char">
+                    <div class="card-icon">🧙‍♂️</div>
+                    <div class="card-title">Aether Mage</div>
+                    <div class="card-price">₩150,000</div>
+                </div>
+                <div class="collection-card" data-id="necro-char">
+                    <div class="card-icon">💀</div>
+                    <div class="card-title">Shadow Necro</div>
+                    <div class="card-price">₩165,000</div>
+                </div>
+            </div>
+
+            <!-- Detail specs of active figure -->
+            <div class="product-details" id="product-details">
+                <div class="details-header">
+                    <h2 class="details-title" id="fig-title">Aether Mage</h2>
+                    <span class="details-price" id="fig-price">₩150,000</span>
+                </div>
+                <p class="details-description" id="fig-description">
+                    시원한 파도를 가르며 서핑보드를 타는 사이버 메카닉 피규어입니다. 네온 라이팅 디테일과 커스터마이징 가능한 초경량 합금 서핑보드가 매력적인 여름 시그니처 에디션입니다.
+                </p>
+
+                <!-- Customizer -->
+                <div class="customizer">
+                    <div class="option-group">
+                        <div class="option-label">보드/튜브/모자 컬러 선택</div>
+                        <div class="color-options">
+                            <span class="color-dot active" data-color="cyan" style="background-color: #00f0ff;"></span>
+                            <span class="color-dot" data-color="magenta" style="background-color: #ff007f;"></span>
+                            <span class="color-dot" data-color="yellow" style="background-color: #ffd700;"></span>
+                            <span class="color-dot" data-color="purple" style="background-color: #8b5cf6;"></span>
+                            <span class="color-dot" data-color="green" style="background-color: #10b981;"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spec List -->
+                <div class="spec-list">
+                    <div class="spec-item">
+                        <span>높이</span>
+                        <span id="fig-height">18.5 cm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>재질</span>
+                        <span id="fig-material">ABS, Diecast Metal</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>제조국</span>
+                        <span>대한민국 (Limited)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>출시일</span>
+                        <span>2026. 06. 01</span>
+                    </div>
+                </div>
+
+                <!-- Purchase Buttons -->
+                <div class="purchase-area">
+                    <button class="action-btn btn-primary" id="add-to-cart-btn">장바구니 담기</button>
+                    <button class="action-btn btn-secondary" id="buy-now-btn">바로 구매</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Column: 3D Canvas Viewer -->
+        <section class="viewer-section">
+            <div class="loader-container" id="loader">
+                <div class="spinner"></div>
+                <div class="loader-text">LOADING 3D ENGINE...</div>
+            </div>
+
+            <!-- Help instruction overlay -->
+            <div class="instruction-overlay" id="instruction">
+                <div class="instruction-row">
+                    <span class="mouse-icon">🖱️</span>
+                    <span>좌클릭 드래그: 회전</span>
+                </div>
+                <div class="instruction-row">
+                    <span class="mouse-icon">⚙️</span>
+                    <span>우클릭 드래그: 이동</span>
+                </div>
+                <div class="instruction-row">
+                    <span class="mouse-icon">🔍</span>
+                    <span>휠 스크롤: 줌인/아웃</span>
+                </div>
+            </div>
+
+            <div id="canvas-container"></div>
+
+            <!-- Viewer controls -->
+            <div class="viewer-ui">
+                <button class="viewer-btn active" id="btn-rotate">
+                    <i data-lucide="rotate-cw" style="width: 16px; height: 16px;"></i>
+                    <span>회전 On</span>
+                </button>
+                <button class="viewer-btn" id="btn-reset">
+                    <i data-lucide="refresh-cw" style="width: 16px; height: 16px;"></i>
+                    <span>카메라 리셋</span>
+                </button>
+                <button class="viewer-btn" id="btn-light">
+                    <i data-lucide="sun" style="width: 16px; height: 16px;" id="light-icon"></i>
+                    <span id="light-text">디스코 라이트</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Side Cart Panel -->
+    <div class="cart-panel" id="cart-panel">
+        <div class="cart-header">
+            <span class="cart-title-txt">장바구니</span>
+            <button class="close-cart" id="cart-close">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <!-- Items added dynamically -->
+            <div class="empty-cart-msg">장바구니가 비어 있습니다.</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>총 금액</span>
+                <span class="cart-total-price" id="cart-total-price">₩0</span>
+            </div>
+            <button class="checkout-btn" id="checkout-btn">주문하기</button>
         </div>
     </div>
 
-    <div class="container" id="products">
-        <h2 class="section-title">인기 신상품</h2>
-        
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-image">👕</div>
-                <div class="product-info">
-                    <span class="product-badge">NEW</span>
-                    <h3 class="product-name">린넨 오버핏 티셔츠</h3>
-                    <p class="product-description">통기성 좋은 100% 린넨 소재로 시원하게 입을 수 있는 오버핏 티셔츠</p>
-                    <div class="product-price">
-                        <span class="price-current">₩39,000</span>
-                        <span class="price-original">₩49,000</span>
-                    </div>
-                    <button class="buy-button">구매하기</button>
+    <!-- Scripting for Three.js & Page Interaction -->
+    <!-- Load Three.js and OrbitControls -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <!-- Load GSAP for smooth transitions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <script>
+        // Lucide Icons Initialization
+        lucide.createIcons();
+
+        // Figure Specifications Data
+        const figuresData = {
+            'mage-char': {
+                name: 'Aether Mage',
+                price: '₩150,000',
+                priceVal: 150000,
+                height: '24.0 cm',
+                material: 'Premium Resin, Hand Painted',
+                desc: '신비로운 에테르 마법 에너지를 다루는 대마법사 게임 캐릭터 피규어입니다. 휘날리는 로브와 빛나는 스태프의 마법적인 디테일이 압도적인 완성도를 자랑합니다.',
+                icon: '🧙‍♂️',
+                isExternal: true,
+                modelPath: '3dmodel/mage.glb'
+            },
+            'necro-char': {
+                name: 'Shadow Necromancer',
+                price: '₩165,000',
+                priceVal: 165000,
+                height: '25.5 cm',
+                material: 'Premium Resin, Metallic Alloy',
+                desc: '어둠의 영혼을 강령하고 조종하는 섀도우 네크로맨서 게임 캐릭터 피규어입니다. 스산한 기운을 내뿜는 정교한 뼈 갑옷 장식과 강력한 아우라가 특징인 프리미엄 에디션입니다.',
+                icon: '💀',
+                isExternal: true,
+                modelPath: '3dmodel/necromancer.glb'
+            }
+        };
+
+        // UI State
+        let activeFigureId = 'mage-char';
+        let activeColor = 'cyan';
+        let activeColorHex = '#00f0ff';
+        const colorHexMap = {
+            cyan: 0x00f0ff,
+            magenta: 0xff007f,
+            yellow: 0xffd700,
+            purple: 0x8b5cf6,
+            green: 0x10b981
+        };
+
+        let cart = [];
+
+        // Elements
+        const collectionCards = document.querySelectorAll('.collection-card');
+        const figTitle = document.getElementById('fig-title');
+        const figPrice = document.getElementById('fig-price');
+        const figDescription = document.getElementById('fig-description');
+        const figHeight = document.getElementById('fig-height');
+        const figMaterial = document.getElementById('fig-material');
+        const colorDots = document.querySelectorAll('.color-dot');
+        const cartToggle = document.getElementById('cart-toggle');
+        const cartPanel = document.getElementById('cart-panel');
+        const cartClose = document.getElementById('cart-close');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartCount = document.getElementById('cart-count');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
+        const buyNowBtn = document.getElementById('buy-now-btn');
+        const checkoutBtn = document.getElementById('checkout-btn');
+
+        // Help overlay fade out after a few seconds
+        const instructionOverlay = document.getElementById('instruction');
+        setTimeout(() => {
+            instructionOverlay.classList.add('hidden');
+        }, 5000);
+
+        // 3D Scene Variables
+        let scene, camera, renderer, controls;
+        let figureGroup; // Group containing the active figure
+        let currentModel = null;
+        let customPart = null; // Reference to the part that changes color
+        let pointLight1, pointLight2; // Light references for dynamic mode
+        let discoMode = false;
+        let autoRotate = true;
+
+        // Init 3D Scene
+        function init3D() {
+            const container = document.getElementById('canvas-container');
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            // Scene
+            scene = new THREE.Scene();
+            // Deep cosmic ocean fog for premium look
+            scene.background = null;
+            scene.fog = new THREE.FogExp2(0x070b19, 0.05);
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
+            camera.position.set(0, 2, 7);
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            container.appendChild(renderer.domElement);
+
+            // Controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.maxPolarAngle = Math.PI / 1.8; // Don't look too much from underneath
+            controls.minDistance = 3;
+            controls.maxDistance = 12;
+            controls.autoRotate = autoRotate;
+            controls.autoRotateSpeed = 1.0;
+
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0x0a1530, 2);
+            scene.add(ambientLight);
+
+            // Main Directional Light (Warm Sun)
+            const sunLight = new THREE.DirectionalLight(0xffffff, 2);
+            sunLight.position.set(5, 8, 5);
+            sunLight.castShadow = true;
+            sunLight.shadow.mapSize.width = 1024;
+            sunLight.shadow.mapSize.height = 1024;
+            scene.add(sunLight);
+
+            // Rim Light (Cyan highlight from back-left)
+            const rimLight = new THREE.DirectionalLight(0x00f0ff, 2.5);
+            rimLight.position.set(-6, 3, -4);
+            scene.add(rimLight);
+
+            // Accent Light (Pink glow from bottom-right)
+            const fillLight = new THREE.DirectionalLight(0xff007f, 1.5);
+            fillLight.position.set(4, -2, 3);
+            scene.add(fillLight);
+
+            // Glowing Points for neon disco vibe
+            pointLight1 = new THREE.PointLight(0x00f0ff, 0, 10);
+            pointLight1.position.set(-3, 3, 2);
+            scene.add(pointLight1);
+
+            pointLight2 = new THREE.PointLight(0xff007f, 0, 10);
+            pointLight2.position.set(3, -1, -2);
+            scene.add(pointLight2);
+
+            // Base platform for figure
+            createPlatform();
+
+            // Figure Group
+            figureGroup = new THREE.Group();
+            scene.add(figureGroup);
+
+            // Load Initial Figure
+            buildFigure(activeFigureId);
+
+            // Remove loader
+            document.getElementById('loader').classList.add('loaded');
+
+            // Resize Event
+            window.addEventListener('resize', onWindowResize);
+
+            // Start animation loop
+            animate();
+        }
+
+        // Create a premium stand for the figure
+        function createPlatform() {
+            const platformGroup = new THREE.Group();
+            platformGroup.position.y = -1.6;
+
+            // Base Cylinders
+            const baseGeo = new THREE.CylinderGeometry(1.6, 1.8, 0.2, 32);
+            const baseMat = new THREE.MeshStandardMaterial({
+                color: 0x0f172a,
+                roughness: 0.2,
+                metalness: 0.8,
+                flatShading: false
+            });
+            const base = new THREE.Mesh(baseGeo, baseMat);
+            base.receiveShadow = true;
+            platformGroup.add(base);
+
+            // Inner glowing rim
+            const ringGeo = new THREE.TorusGeometry(1.4, 0.04, 8, 64);
+            const ringMat = new THREE.MeshBasicMaterial({
+                color: 0x00f0ff
+            });
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            ring.rotation.x = Math.PI / 2;
+            ring.position.y = 0.11;
+            platformGroup.add(ring);
+
+            // Grid helper style projection under the figure
+            const gridHelper = new THREE.GridHelper(2.6, 10, 0x00f0ff, 0x1e293b);
+            gridHelper.position.y = 0.12;
+            platformGroup.add(gridHelper);
+
+            scene.add(platformGroup);
+        }
+
+        // Build Figure procedurally in JS using primitives OR load GLB
+        function buildFigure(id) {
+            const isExt = figuresData[id].isExternal;
+            const loaderEl = document.getElementById('loader');
+            const loaderText = loaderEl.querySelector('.loader-text');
+            
+            if (isExt) {
+                loaderEl.classList.remove('loaded');
+                loaderText.textContent = "CHARGING 3D CHARACTER (0%)...";
+            }
+
+            // Clear existing models in group
+            while (figureGroup.children.length > 0) {
+                figureGroup.remove(figureGroup.children[0]);
+            }
+
+            customPart = null;
+            currentModel = new THREE.Group();
+            currentModel.position.y = -1.0;
+
+            const metalMat = new THREE.MeshStandardMaterial({
+                color: 0xe2e8f0,
+                metalness: 0.9,
+                roughness: 0.15,
+                name: 'metal'
+            });
+
+            const darkMetalMat = new THREE.MeshStandardMaterial({
+                color: 0x1e293b,
+                metalness: 0.8,
+                roughness: 0.3
+            });
+
+            const goldMat = new THREE.MeshStandardMaterial({
+                color: 0xffd700,
+                metalness: 0.9,
+                roughness: 0.1,
+                name: 'gold'
+            });
+
+            const customColorHex = colorHexMap[activeColor];
+            const customMat = new THREE.MeshStandardMaterial({
+                color: customColorHex,
+                metalness: 0.5,
+                roughness: 0.2,
+                name: 'custom'
+            });
+
+            if (isExt) {
+                // LOAD EXTERNAL GLB MODEL
+                const gltfLoader = new THREE.GLTFLoader();
+                gltfLoader.load(
+                    figuresData[id].modelPath,
+                    (gltf) => {
+                        const loadedModel = gltf.scene;
+
+                        // Center and Auto Scale the model to fit inside our 2-unit high viewer window
+                        const box = new THREE.Box3().setFromObject(loadedModel);
+                        const size = box.getSize(new THREE.Vector3());
+                        const center = box.getCenter(new THREE.Vector3());
+
+                        // Offset the position to center it
+                        loadedModel.position.x = -center.x;
+                        loadedModel.position.y = -box.min.y;
+                        loadedModel.position.z = -center.z;
+
+                        // Scale to fits roughly 2.34 units high (1.3 times larger than previous 1.8)
+                        const maxDim = Math.max(size.x, size.y, size.z);
+                        let targetScale = (1.8 * 1.3) / maxDim;
+                        loadedModel.scale.set(targetScale, targetScale, targetScale);
+
+                        // Shadows & Materials Setup
+                        loadedModel.traverse((child) => {
+                            if (child.isMesh) {
+                                child.castShadow = true;
+                                child.receiveShadow = true;
+                                if (child.material) {
+                                    child.material.roughness = Math.min(child.material.roughness || 0.5, 0.6);
+                                    if (child.material.metalness !== undefined) {
+                                        child.material.metalness = Math.max(child.material.metalness, 0.1);
+                                    }
+                                }
+                            }
+                        });
+
+                        currentModel.add(loadedModel);
+
+                        // Create custom glowing aura ring under the external model for color customization
+                        const ringGeo = new THREE.TorusGeometry(0.8, 0.05, 8, 32);
+                        const ringMat = new THREE.MeshStandardMaterial({
+                            color: customColorHex,
+                            emissive: customColorHex,
+                            emissiveIntensity: 1.5,
+                            roughness: 0.2,
+                            metalness: 0.8
+                        });
+                        const auraRing = new THREE.Mesh(ringGeo, ringMat);
+                        auraRing.rotation.x = Math.PI / 2;
+                        auraRing.position.y = -0.07;
+                        currentModel.add(auraRing);
+                        customPart = auraRing;
+
+                        figureGroup.add(currentModel);
+
+                        // Animate Scale
+                        currentModel.scale.set(0, 0, 0);
+                        gsap.to(currentModel.scale, {
+                            x: 1,
+                            y: 1,
+                            z: 1,
+                            duration: 0.8,
+                            ease: 'back.out(1.2)'
+                        });
+
+                        // Hide Loader
+                        loaderEl.classList.add('loaded');
+                    },
+                    (xhr) => {
+                        if (xhr.total) {
+                            const percent = Math.round((xhr.loaded / xhr.total) * 100);
+                            loaderText.textContent = `CHARGING 3D CHARACTER (${percent}%)...`;
+                        } else {
+                            loaderText.textContent = "CHARGING 3D CHARACTER...";
+                        }
+                    },
+                    (error) => {
+                        console.error('Failed to load GLTF model:', error);
+                        
+                        // Fallback Model
+                        createFallbackHologram(id, customMat, metalMat, customColorHex);
+
+                        // Hide Loader
+                        loaderEl.classList.add('loaded');
+
+                        // Show friendly warning
+                        showCORSWarning();
+                    }
+                );
+            } else {
+                // Procedural meshes (Surf Robot, Beach Neko, Sunset Mech)
+                if (id === 'surf-robot') {
+                    // 1. Surfing Board
+                    const boardGeo = new THREE.CylinderGeometry(0.5, 0.4, 3.2, 4, 1, false);
+                    boardGeo.scale(0.12, 1, 0.7);
+                    const board = new THREE.Mesh(boardGeo, customMat);
+                    board.rotation.z = Math.PI / 2;
+                    board.rotation.x = Math.PI / 8;
+                    board.position.set(0, 0.2, 0);
+                    board.castShadow = true;
+                    currentModel.add(board);
+                    customPart = board;
+
+                    // 2. Robot Legs
+                    const legGeo = new THREE.CylinderGeometry(0.08, 0.08, 0.6, 8);
+                    const leftLeg = new THREE.Mesh(legGeo, metalMat);
+                    leftLeg.position.set(-0.3, 0.6, 0.1);
+                    leftLeg.rotation.z = 0.2;
+                    leftLeg.castShadow = true;
+                    currentModel.add(leftLeg);
+
+                    const rightLeg = new THREE.Mesh(legGeo, metalMat);
+                    rightLeg.position.set(0.3, 0.6, -0.1);
+                    rightLeg.rotation.z = -0.2;
+                    rightLeg.castShadow = true;
+                    currentModel.add(rightLeg);
+
+                    // 3. Body torso
+                    const torsoGeo = new THREE.BoxGeometry(0.7, 0.8, 0.5);
+                    const torso = new THREE.Mesh(torsoGeo, darkMetalMat);
+                    torso.position.set(0, 1.2, 0);
+                    torso.castShadow = true;
+                    currentModel.add(torso);
+
+                    const coreGeo = new THREE.SphereGeometry(0.15, 16, 16);
+                    const coreMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
+                    const core = new THREE.Mesh(coreGeo, coreMat);
+                    core.position.set(0, 1.3, 0.26);
+                    currentModel.add(core);
+
+                    // 4. Arms
+                    const armGeo = new THREE.CylinderGeometry(0.06, 0.06, 0.5, 8);
+                    const leftArm = new THREE.Mesh(armGeo, metalMat);
+                    leftArm.position.set(-0.48, 1.3, 0.2);
+                    leftArm.rotation.x = -Math.PI / 4;
+                    leftArm.rotation.z = 0.4;
+                    currentModel.add(leftArm);
+
+                    const rightArm = new THREE.Mesh(armGeo, metalMat);
+                    rightArm.position.set(0.48, 1.3, -0.2);
+                    rightArm.rotation.x = Math.PI / 4;
+                    rightArm.rotation.z = -0.4;
+                    currentModel.add(rightArm);
+
+                    // 5. Head
+                    const headGeo = new THREE.SphereGeometry(0.32, 32, 32);
+                    const head = new THREE.Mesh(headGeo, metalMat);
+                    head.position.set(0, 1.8, 0);
+                    head.castShadow = true;
+                    currentModel.add(head);
+
+                    const visorGeo = new THREE.BoxGeometry(0.4, 0.1, 0.1);
+                    const visorMat = new THREE.MeshBasicMaterial({ color: 0xff007f });
+                    const visor = new THREE.Mesh(visorGeo, visorMat);
+                    visor.position.set(0, 1.85, 0.26);
+                    currentModel.add(visor);
+
+                    const waveGeo = new THREE.TorusGeometry(0.8, 0.02, 8, 32);
+                    const waveMat = new THREE.MeshBasicMaterial({
+                        color: 0x00f0ff,
+                        transparent: true,
+                        opacity: 0.3
+                    });
+                    const wave = new THREE.Mesh(waveGeo, waveMat);
+                    wave.rotation.x = Math.PI / 2;
+                    wave.position.y = 0.05;
+                    currentModel.add(wave);
+
+                } else if (id === 'beach-cat') {
+                    // BEACH NEKO
+                    const tubeGeo = new THREE.TorusGeometry(0.75, 0.24, 16, 64);
+                    const tube = new THREE.Mesh(tubeGeo, customMat);
+                    tube.rotation.x = Math.PI / 2 + 0.1;
+                    tube.position.set(0, 0.6, 0);
+                    tube.castShadow = true;
+                    currentModel.add(tube);
+                    customPart = tube;
+
+                    const bodyGeo = new THREE.SphereGeometry(0.42, 32, 32);
+                    const catSkinMat = new THREE.MeshStandardMaterial({
+                        color: 0xf1f5f9,
+                        roughness: 0.6,
+                        metalness: 0.0
+                    });
+                    const body = new THREE.Mesh(bodyGeo, catSkinMat);
+                    body.position.set(0, 0.7, 0);
+                    body.scale.set(1, 1.1, 1);
+                    body.castShadow = true;
+                    currentModel.add(body);
+
+                    const headGeo = new THREE.SphereGeometry(0.46, 32, 32);
+                    const head = new THREE.Mesh(headGeo, catSkinMat);
+                    head.position.set(0, 1.4, 0.05);
+                    head.castShadow = true;
+                    currentModel.add(head);
+
+                    const earGeo = new THREE.ConeGeometry(0.18, 0.35, 4);
+                    const leftEar = new THREE.Mesh(earGeo, catSkinMat);
+                    leftEar.position.set(-0.25, 1.75, 0.05);
+                    leftEar.rotation.z = 0.25;
+                    leftEar.rotation.y = Math.PI / 4;
+                    leftEar.castShadow = true;
+                    currentModel.add(leftEar);
+
+                    const rightEar = new THREE.Mesh(earGeo, catSkinMat);
+                    rightEar.position.set(0.25, 1.75, 0.05);
+                    rightEar.rotation.z = -0.25;
+                    rightEar.rotation.y = -Math.PI / 4;
+                    rightEar.castShadow = true;
+                    currentModel.add(rightEar);
+
+                    const innerEarGeo = new THREE.ConeGeometry(0.1, 0.22, 4);
+                    const innerEarMat = new THREE.MeshBasicMaterial({ color: 0xffa0c0 });
+                    const leftInnerEar = new THREE.Mesh(innerEarGeo, innerEarMat);
+                    leftInnerEar.position.set(-0.23, 1.73, 0.1);
+                    leftInnerEar.rotation.z = 0.25;
+                    leftInnerEar.rotation.y = Math.PI / 4;
+                    currentModel.add(leftInnerEar);
+
+                    const rightInnerEar = new THREE.Mesh(innerEarGeo, innerEarMat);
+                    rightInnerEar.position.set(0.23, 1.73, 0.1);
+                    rightInnerEar.rotation.z = -0.25;
+                    rightInnerEar.rotation.y = -Math.PI / 4;
+                    currentModel.add(rightInnerEar);
+
+                    const glassFrameGeo = new THREE.BoxGeometry(0.72, 0.18, 0.08);
+                    const glassMat = new THREE.MeshStandardMaterial({
+                        color: 0x111111,
+                        roughness: 0.1,
+                        metalness: 0.9
+                    });
+                    const glasses = new THREE.Mesh(glassFrameGeo, glassMat);
+                    glasses.position.set(0, 1.45, 0.44);
+                    glasses.rotation.x = -0.05;
+                    currentModel.add(glasses);
+
+                    const lensGeo = new THREE.BoxGeometry(0.25, 0.12, 0.02);
+                    const lensMat = new THREE.MeshBasicMaterial({ color: 0xff007f });
+                    const leftLens = new THREE.Mesh(lensGeo, lensMat);
+                    leftLens.position.set(-0.2, 1.45, 0.49);
+                    currentModel.add(leftLens);
+
+                    const rightLens = new THREE.Mesh(lensGeo, lensMat);
+                    rightLens.position.set(0.2, 1.45, 0.49);
+                    currentModel.add(rightLens);
+
+                    const pawGeo = new THREE.SphereGeometry(0.1, 16, 16);
+                    const leftPaw = new THREE.Mesh(pawGeo, catSkinMat);
+                    leftPaw.position.set(-0.35, 0.72, 0.52);
+                    currentModel.add(leftPaw);
+
+                    const rightPaw = new THREE.Mesh(pawGeo, catSkinMat);
+                    rightPaw.position.set(0.35, 0.72, 0.52);
+                    currentModel.add(rightPaw);
+
+                    const tailGeo = new THREE.CylinderGeometry(0.06, 0.06, 0.7, 8);
+                    const tail = new THREE.Mesh(tailGeo, catSkinMat);
+                    tail.position.set(0, 0.5, -0.6);
+                    tail.rotation.x = -Math.PI / 4;
+                    currentModel.add(tail);
+
+                } else if (id === 'sunset-mech') {
+                    // SUNSET MECH
+                    const torsoGeo = new THREE.BoxGeometry(1.0, 1.1, 0.8);
+                    const torso = new THREE.Mesh(torsoGeo, darkMetalMat);
+                    torso.position.set(0, 0.9, 0);
+                    torso.castShadow = true;
+                    currentModel.add(torso);
+
+                    const legGeo = new THREE.CylinderGeometry(0.16, 0.22, 0.5, 12);
+                    const leftLeg = new THREE.Mesh(legGeo, metalMat);
+                    leftLeg.position.set(-0.35, 0.25, 0);
+                    leftLeg.castShadow = true;
+                    currentModel.add(leftLeg);
+
+                    const rightLeg = new THREE.Mesh(legGeo, metalMat);
+                    rightLeg.position.set(0.35, 0.25, 0);
+                    rightLeg.castShadow = true;
+                    currentModel.add(rightLeg);
+
+                    const shoulderGeo = new THREE.SphereGeometry(0.24, 16, 16);
+                    const leftSh = new THREE.Mesh(shoulderGeo, metalMat);
+                    leftSh.position.set(-0.65, 1.2, 0);
+                    currentModel.add(leftSh);
+
+                    const rightSh = new THREE.Mesh(shoulderGeo, metalMat);
+                    rightSh.position.set(0.65, 1.2, 0);
+                    currentModel.add(rightSh);
+
+                    const armGeo = new THREE.CylinderGeometry(0.12, 0.08, 0.7, 8);
+                    const leftArm = new THREE.Mesh(armGeo, darkMetalMat);
+                    leftArm.position.set(-0.75, 0.8, 0.2);
+                    leftArm.rotation.x = -Math.PI / 6;
+                    leftArm.castShadow = true;
+                    currentModel.add(leftArm);
+
+                    const rightArm = new THREE.Mesh(armGeo, darkMetalMat);
+                    rightArm.position.set(0.75, 0.8, 0.2);
+                    rightArm.rotation.x = -Math.PI / 3;
+                    rightArm.rotation.z = -Math.PI / 12;
+                    rightArm.castShadow = true;
+                    currentModel.add(rightArm);
+
+                    const headGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.36, 16);
+                    const head = new THREE.Mesh(headGeo, metalMat);
+                    head.position.set(0, 1.62, 0);
+                    head.castShadow = true;
+                    currentModel.add(head);
+
+                    const eyeGeo = new THREE.SphereGeometry(0.08, 8, 8);
+                    const eyeMat = new THREE.MeshBasicMaterial({ color: 0xff007f });
+                    const eye = new THREE.Mesh(eyeGeo, eyeMat);
+                    eye.position.set(0, 1.62, 0.22);
+                    currentModel.add(eye);
+
+                    const hatGroup = new THREE.Group();
+                    hatGroup.position.set(0, 1.84, 0);
+                    hatGroup.rotation.x = 0.1;
+
+                    const brimGeo = new THREE.CylinderGeometry(0.7, 0.7, 0.02, 32);
+                    const brim = new THREE.Mesh(brimGeo, customMat);
+                    hatGroup.add(brim);
+
+                    const topGeo = new THREE.ConeGeometry(0.36, 0.32, 16);
+                    const top = new THREE.Mesh(topGeo, customMat);
+                    top.position.y = 0.16;
+                    hatGroup.add(top);
+
+                    currentModel.add(hatGroup);
+                    customPart = hatGroup;
+
+                    const glassGroup = new THREE.Group();
+                    glassGroup.position.set(0.85, 0.9, 0.5);
+
+                    const stemGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.26, 8);
+                    const stem = new THREE.Mesh(stemGeo, metalMat);
+                    glassGroup.add(stem);
+
+                    const cupGeo = new THREE.ConeGeometry(0.18, 0.2, 16, 1, true);
+                    const cupMat = new THREE.MeshPhysicalMaterial({
+                        color: 0xffffff,
+                        transparent: true,
+                        opacity: 0.5,
+                        roughness: 0.1,
+                        transmission: 0.9,
+                        thickness: 0.1
+                    });
+                    const cup = new THREE.Mesh(cupGeo, cupMat);
+                    cup.position.y = 0.18;
+                    glassGroup.add(cup);
+
+                    const drinkGeo = new THREE.ConeGeometry(0.14, 0.12, 16);
+                    const drinkMat = new THREE.MeshBasicMaterial({ color: 0xffd700 });
+                    const drink = new THREE.Mesh(drinkGeo, drinkMat);
+                    drink.position.y = 0.15;
+                    glassGroup.add(drink);
+
+                    const cherryGeo = new THREE.SphereGeometry(0.04, 8, 8);
+                    const cherryMat = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+                    const cherry = new THREE.Mesh(cherryGeo, cherryMat);
+                    cherry.position.set(0.08, 0.22, 0);
+                    glassGroup.add(cherry);
+
+                    currentModel.add(glassGroup);
+                }
+
+                figureGroup.add(currentModel);
+
+                // Animate Scale
+                currentModel.scale.set(0, 0, 0);
+                gsap.to(currentModel.scale, {
+                    x: 1,
+                    y: 1,
+                    z: 1,
+                    duration: 0.8,
+                    ease: 'back.out(1.5)'
+                });
+            }
+        }
+
+        // Create a beautiful glowing fallback hologram for CORS / offline issues
+        function createFallbackHologram(id, customMat, metalMat, hexColor) {
+            const fallbackGroup = new THREE.Group();
+            
+            // 1. Glowing Pedestal Pillar
+            const pillarGeo = new THREE.CylinderGeometry(0.3, 0.4, 1.2, 6);
+            const pillar = new THREE.Mesh(pillarGeo, metalMat);
+            pillar.position.y = 0.6;
+            fallbackGroup.add(pillar);
+
+            // 2. Floating Crystal/Gem (Holographic Character Placeholder)
+            const crystalGeo = new THREE.OctahedronGeometry(0.5, 0);
+            const crystalMat = new THREE.MeshStandardMaterial({
+                color: hexColor,
+                emissive: hexColor,
+                emissiveIntensity: 0.8,
+                transparent: true,
+                opacity: 0.85,
+                metalness: 0.9,
+                roughness: 0.1
+            });
+            const crystal = new THREE.Mesh(crystalGeo, crystalMat);
+            crystal.position.set(0, 1.6, 0);
+            fallbackGroup.add(crystal);
+            customPart = crystal;
+
+            // 3. Glowing orbit ring
+            const orbitGeo = new THREE.TorusGeometry(0.75, 0.03, 8, 24);
+            const orbitMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
+            const orbit = new THREE.Mesh(orbitGeo, orbitMat);
+            orbit.rotation.x = Math.PI / 2 + 0.3;
+            orbit.position.y = 1.6;
+            fallbackGroup.add(orbit);
+
+            // Idle spin just for the crystal
+            gsap.to(crystal.rotation, {
+                y: Math.PI * 2,
+                duration: 6,
+                repeat: -1,
+                ease: 'none'
+            });
+
+            currentModel.add(fallbackGroup);
+            figureGroup.add(currentModel);
+
+            // Animate Scale
+            currentModel.scale.set(0, 0, 0);
+            gsap.to(currentModel.scale, {
+                x: 1,
+                y: 1,
+                z: 1,
+                duration: 0.8,
+                ease: 'back.out(1.2)'
+            });
+        }
+
+        // Show an elegant glassmorphism non-blocking warning box for CORS
+        function showCORSWarning() {
+            if (document.getElementById('cors-warn')) return;
+
+            const warnDiv = document.createElement('div');
+            warnDiv.id = 'cors-warn';
+            warnDiv.style.position = 'absolute';
+            warnDiv.style.top = '2rem';
+            warnDiv.style.left = '2rem';
+            warnDiv.style.right = '2rem';
+            warnDiv.style.background = 'rgba(239, 68, 68, 0.15)';
+            warnDiv.style.border = '1px solid rgba(239, 68, 68, 0.4)';
+            warnDiv.style.padding = '1rem 1.2rem';
+            warnDiv.style.borderRadius = '12px';
+            warnDiv.style.backdropFilter = 'blur(10px)';
+            warnDiv.style.color = '#fecaca';
+            warnDiv.style.fontSize = '0.82rem';
+            warnDiv.style.lineHeight = '1.5';
+            warnDiv.style.zIndex = '50';
+            warnDiv.style.display = 'flex';
+            warnDiv.style.justifyContent = 'space-between';
+            warnDiv.style.alignItems = 'center';
+            warnDiv.style.gap = '1rem';
+            warnDiv.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
+            warnDiv.style.transition = 'opacity 0.4s';
+
+            warnDiv.innerHTML = `
+                <div>
+                    <strong>⚠️ 로컬 파일 보안 제한(CORS) 알림</strong><br>
+                    브라우저 보안 정책으로 인해 로컬 파일 실행 시 3D 모델(.glb)을 직접 불러오지 못해 <strong>홀로그램 대체 모델</strong>로 표시됩니다. 
+                    VS Code Live Server 등의 로컬 웹 서버 환경에서 구동하시면 실제 캐릭터 피규어를 보실 수 있습니다.
                 </div>
-            </div>
+                <button id="close-cors-warn" style="background:none; border:none; color:#fecaca; cursor:pointer; font-weight:bold; font-size:1.1rem;">×</button>
+            `;
+            
+            document.querySelector('.viewer-section').appendChild(warnDiv);
 
-            <div class="product-card">
-                <div class="product-image">🩳</div>
-                <div class="product-info">
-                    <span class="product-badge">BEST</span>
-                    <h3 class="product-name">쿨링 숏팬츠</h3>
-                    <p class="product-description">쿨링 기능이 있는 신소재로 더위를 완벽하게 차단하는 숏팬츠</p>
-                    <div class="product-price">
-                        <span class="price-current">₩45,000</span>
-                        <span class="price-original">₩55,000</span>
+            document.getElementById('close-cors-warn').addEventListener('click', () => {
+                warnDiv.style.opacity = '0';
+                setTimeout(() => warnDiv.remove(), 400);
+            });
+
+            setTimeout(() => {
+                if (warnDiv.parentNode) {
+                    warnDiv.style.opacity = '0';
+                    setTimeout(() => warnDiv.remove(), 400);
+                }
+            }, 9000);
+        }
+
+        // Apply Color Customization to the selected part
+        function updateModelColor(hexColor) {
+            if (!customPart) return;
+
+            // Traverse the group to update all child mesh materials if it's a group (like the Straw Hat)
+            customPart.traverse((child) => {
+                if (child.isMesh && child.material) {
+                    // Smooth transition of color
+                    gsap.to(child.material.color, {
+                        r: ((hexColor >> 16) & 255) / 255,
+                        g: ((hexColor >> 8) & 255) / 255,
+                        b: (hexColor & 255) / 255,
+                        duration: 0.4
+                    });
+                }
+            });
+        }
+
+        // Window resize handler
+        function onWindowResize() {
+            const container = document.getElementById('canvas-container');
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(width, height);
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Update Controls
+            if (controls) controls.update();
+
+            // Rotate figure base animation or minor idle movement
+            if (currentModel) {
+                // Wave effect (minor floating idle animation)
+                const time = Date.now() * 0.0015;
+                currentModel.position.y = -1.0 + Math.sin(time) * 0.05;
+            }
+
+            // Disco Party Mode lighting rotation
+            if (discoMode) {
+                const time = Date.now() * 0.003;
+                pointLight1.position.x = Math.sin(time) * 4;
+                pointLight1.position.z = Math.cos(time) * 4;
+
+                pointLight2.position.x = -Math.sin(time) * 4;
+                pointLight2.position.z = -Math.cos(time) * 4;
+            }
+
+            // Render
+            if (renderer && scene && camera) {
+                renderer.render(scene, camera);
+            }
+        }
+
+        // --- Interaction Event Listeners ---
+
+        // 1. Choose Figure Cards
+        collectionCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const id = card.getAttribute('data-id');
+                if (id === activeFigureId) return;
+
+                // Toggle Active Class
+                collectionCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+
+                // Update Data State
+                activeFigureId = id;
+                const data = figuresData[id];
+
+                // Update Text Contents
+                figTitle.textContent = data.name;
+                figPrice.textContent = data.price;
+                figDescription.textContent = data.desc;
+                figHeight.textContent = data.height;
+                figMaterial.textContent = data.material;
+
+                // Re-build 3D Figure model
+                buildFigure(id);
+            });
+        });
+
+        // 2. Customizer Color Dots
+        colorDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                colorDots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+
+                activeColor = dot.getAttribute('data-color');
+                activeColorHex = colorHexMap[activeColor];
+
+                // Update Model Color in 3D
+                updateModelColor(activeColorHex);
+            });
+        });
+
+        // 3. 3D Viewer Control Actions
+        const btnRotate = document.getElementById('btn-rotate');
+        const btnReset = document.getElementById('btn-reset');
+        const btnLight = document.getElementById('btn-light');
+        const lightIcon = document.getElementById('light-icon');
+        const lightText = document.getElementById('light-text');
+
+        btnRotate.addEventListener('click', () => {
+            autoRotate = !autoRotate;
+            controls.autoRotate = autoRotate;
+            if (autoRotate) {
+                btnRotate.classList.add('active');
+                btnRotate.querySelector('span').textContent = '회전 On';
+            } else {
+                btnRotate.classList.remove('active');
+                btnRotate.querySelector('span').textContent = '회전 Off';
+            }
+        });
+
+        btnReset.addEventListener('click', () => {
+            // Smoothly reset camera position
+            gsap.to(camera.position, {
+                x: 0,
+                y: 2,
+                z: 7,
+                duration: 1,
+                onUpdate: () => controls.update()
+            });
+            controls.target.set(0, 0, 0);
+        });
+
+        btnLight.addEventListener('click', () => {
+            discoMode = !discoMode;
+            if (discoMode) {
+                btnLight.classList.add('active');
+                lightText.textContent = '클래식 라이트';
+                lightIcon.setAttribute('data-lucide', 'moon');
+                // Crank up point lights
+                gsap.to(pointLight1, { intensity: 4, duration: 0.5 });
+                gsap.to(pointLight2, { intensity: 4, duration: 0.5 });
+            } else {
+                btnLight.classList.remove('active');
+                lightText.textContent = '디스코 라이트';
+                lightIcon.setAttribute('data-lucide', 'sun');
+                // Turn off point lights
+                gsap.to(pointLight1, { intensity: 0, duration: 0.5 });
+                gsap.to(pointLight2, { intensity: 0, duration: 0.5 });
+            }
+            lucide.createIcons();
+        });
+
+
+        // --- Shopping Cart Logic ---
+
+        function toggleCart() {
+            cartPanel.classList.toggle('open');
+        }
+
+        cartToggle.addEventListener('click', toggleCart);
+        cartClose.addEventListener('click', toggleCart);
+
+        // Add to Cart
+        addToCartBtn.addEventListener('click', () => {
+            const data = figuresData[activeFigureId];
+            
+            // Check if item with exact figure and color is already in cart
+            const existingItem = cart.find(item => item.id === activeFigureId && item.color === activeColor);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: activeFigureId,
+                    name: data.name,
+                    price: data.priceVal,
+                    color: activeColor,
+                    colorHex: activeColorHex,
+                    icon: data.icon,
+                    quantity: 1
+                });
+            }
+
+            updateCartUI();
+            
+            // Open cart panel automatically to show progress
+            cartPanel.classList.add('open');
+        });
+
+        // Remove from Cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="empty-cart-msg">장바구니가 비어 있습니다.</div>';
+                cartCount.textContent = '0';
+                cartCount.style.display = 'none';
+                cartTotalPrice.textContent = '₩0';
+                return;
+            }
+
+            // Update badge count
+            const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalQty;
+            cartCount.style.display = 'flex';
+
+            let totalPrice = 0;
+
+            cart.forEach((item, index) => {
+                totalPrice += item.price * item.quantity;
+
+                const itemEl = document.createElement('div');
+                itemEl.classList.add('cart-item');
+                
+                itemEl.innerHTML = `
+                    <div class="cart-item-img">${item.icon}</div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-meta">
+                            컬러: <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background-color:${item.colorHex}; vertical-align:middle;"></span> ${item.color} | 수량: ${item.quantity}
+                        </div>
+                        <div class="cart-item-price">₩${(item.price * item.quantity).toLocaleString()}</div>
                     </div>
-                    <button class="buy-button">구매하기</button>
-                </div>
-            </div>
+                    <button class="cart-item-remove" data-index="${index}">
+                        <i data-lucide="trash-2" style="width: 18px; height: 18px;"></i>
+                    </button>
+                `;
+                
+                cartItemsContainer.appendChild(itemEl);
+            });
 
-            <div class="product-card">
-                <div class="product-image">👗</div>
-                <div class="product-info">
-                    <span class="product-badge">NEW</span>
-                    <h3 class="product-name">플로럴 미디 드레스</h3>
-                    <p class="product-description">여름의 상징인 플로럴 패턴으로 여성스러운 매력을 한층 더한 드레스</p>
-                    <div class="product-price">
-                        <span class="price-current">₩69,000</span>
-                        <span class="price-original">₩89,000</span>
-                    </div>
-                    <button class="buy-button">구매하기</button>
-                </div>
-            </div>
+            cartTotalPrice.textContent = `₩${totalPrice.toLocaleString()}`;
+            lucide.createIcons();
 
-            <div class="product-card">
-                <div class="product-image">🧢</div>
-                <div class="product-info">
-                    <span class="product-badge">HOT</span>
-                    <h3 class="product-name">UV 차단 캡</h3>
-                    <p class="product-description">자외선 차단율 99%의 기능성 캡으로 강한 햇살로부터 보호</p>
-                    <div class="product-price">
-                        <span class="price-current">₩25,000</span>
-                        <span class="price-original">₩35,000</span>
-                    </div>
-                    <button class="buy-button">구매하기</button>
-                </div>
-            </div>
+            // Re-bind delete buttons
+            const removeBtns = document.querySelectorAll('.cart-item-remove');
+            removeBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = parseInt(btn.getAttribute('data-index'));
+                    removeFromCart(idx);
+                });
+            });
+        }
 
-            <div class="product-card">
-                <div class="product-image">👟</div>
-                <div class="product-info">
-                    <span class="product-badge">NEW</span>
-                    <h3 class="product-name">메쉬 러닝슈즈</h3>
-                    <p class="product-description">가벼운 메쉬 소재와 쿠션 좋은 솔로 장시간 착용에도 편안한 슈즈</p>
-                    <div class="product-price">
-                        <span class="price-current">₩89,000</span>
-                        <span class="price-original">₩109,000</span>
-                    </div>
-                    <button class="buy-button">구매하기</button>
-                </div>
-            </div>
+        // Buy now button
+        buyNowBtn.addEventListener('click', () => {
+            const data = figuresData[activeFigureId];
+            alert(`바로 구매를 진행합니다.\n상품: ${data.name} (컬러: ${activeColor})\n금액: ${data.price}`);
+        });
 
-            <div class="product-card">
-                <div class="product-image">🕶️</div>
-                <div class="product-info">
-                    <span class="product-badge">BEST</span>
-                    <h3 class="product-name">클래식 선글라스</h3>
-                    <p class="product-description">UV400 차단 렌즈로 눈을 보호하면서도 스타일리시한 선글라스</p>
-                    <div class="product-price">
-                        <span class="price-current">₩55,000</span>
-                        <span class="price-original">₩75,000</span>
-                    </div>
-                    <button class="buy-button">구매하기</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        // Checkout Button
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('장바구니가 비어 있어 주문을 할 수 없습니다.');
+                return;
+            }
+            alert('주문 완료 페이지로 이동합니다. 데모 결제가 완료되었습니다!');
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        });
 
-    <div class="features">
-        <h2 class="section-title">특별한 혜택</h2>
-        <div class="features-grid">
-            <div class="feature-item">
-                <div class="feature-icon">🚚</div>
-                <h3 class="feature-title">무료 배송</h3>
-                <p class="feature-description">3만원 이상 구매 시 무료 배송</p>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon">↩️</div>
-                <h3 class="feature-title">30일 교환/반품</h3>
-                <p class="feature-description">불만족 시 30일 이내 무료 교환</p>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon">🎁</div>
-                <h3 class="feature-title">특별 할인</h3>
-                <p class="feature-description">첫 구매 고객 10% 추가 할인</p>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon">💳</div>
-                <h3 class="feature-title">간편 결제</h3>
-                <p class="feature-description">다양한 결제 수단 지원</p>
-            </div>
-        </div>
-    </div>
 
-    <div class="newsletter">
-        <h2>📧 뉴스레터 구독</h2>
-        <p>최신 신상품과 특별 할인 정보를 가장 먼저 받아보세요!</p>
-        <form class="newsletter-form">
-            <input type="email" placeholder="이메일 주소를 입력하세요">
-            <button type="submit">구독하기</button>
-        </form>
-    </div>
-
-    <footer>
-        <p>© 2024 Summer Collection. All rights reserved.</p>
-    </footer>
+        // Start 3D Engine on window load
+        window.onload = () => {
+            init3D();
+            updateCartUI();
+        };
+    </script>
 </body>
 </html>
